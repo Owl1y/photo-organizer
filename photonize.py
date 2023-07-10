@@ -5,22 +5,6 @@ import piexif
 import time
 import datetime
 
-def get_date(video_path):
-    try:
-        exif_dict = piexif.load(video_path)
-        if 'Exif' in exif_dict:
-            exif_data = exif_dict['Exif']
-            creation_date_tag = piexif.ExifIFD.DateTimeOriginal
-
-            if creation_date_tag in exif_data:
-                creation_date = exif_data[creation_date_tag].decode('utf-8')
-                return creation_date
-
-    except (KeyError, ValueError):
-        pass
-
-    return None
-
 current_cwd = os.getcwd()
 file_list = os.listdir(current_cwd)
 
@@ -37,7 +21,8 @@ for source in cut_filelist:
     iso_time = modification_time.date().isoformat()
     # print(time.ctime(os_time))
     
-    print(source, get_date(source), iso_time)
+    # print(source, get_date(source), iso_time)
+    print(source, iso_time)
     # print(datetime.datetime.fromtimestamp(os_time))
 
 
